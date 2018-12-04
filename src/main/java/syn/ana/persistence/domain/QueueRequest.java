@@ -1,7 +1,14 @@
 package syn.ana.persistence.domain;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class QueueRequest {
-	private long nameID;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long _id;
 	private String name;
 	private requestType type;
 
@@ -16,25 +23,6 @@ public class QueueRequest {
 	public QueueRequest(String name, requestType type) {
 		this.setName(name);
 		this.setType(type);
-	}
-
-	public QueueRequest(int id, requestType type) {
-		this.setNameID(id);
-		this.setType(type);
-	}
-
-	public QueueRequest(int id, String name, requestType type) {
-		this.setNameID(id);
-		this.setName(name);
-		this.setType(type);
-	}
-
-	public long getNameID() {
-		return nameID;
-	}
-
-	public void setNameID(long nameID) {
-		this.nameID = nameID;
 	}
 
 	public String getName() {
@@ -52,4 +40,13 @@ public class QueueRequest {
 	public void setType(requestType type) {
 		this.type = type;
 	}
+
+	public long get_id() {
+		return _id;
+	}
+
+	public void set_id(long _id) {
+		this._id = _id;
+	}
+
 }

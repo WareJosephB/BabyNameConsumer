@@ -15,6 +15,7 @@ public class RequestService {
 	private BabyNameRepository repo;
 
 	public void parse(QueueRequest request) {
+		System.out.println(request);
 		if (request.getType() == requestType.SAVE) {
 			save(request);
 		} else if (request.getType() == requestType.DELETE) {
@@ -25,17 +26,19 @@ public class RequestService {
 	}
 
 	private void update(QueueRequest request) {
-		repo.findById(request.getNameID()).get().setName(request.getName());
+		repo.findById(request.get_id()).get().setName(request.getName());
 
 	}
 
 	private void delete(QueueRequest request) {
-		repo.deleteById(request.getNameID());
+		repo.deleteById(request.get_id());
 
 	}
 
 	private void save(QueueRequest request) {
-		repo.save(new BabyName(request.getName()));
+		BabyName persisting = new BabyName(request.getName());
+		persisting.set_id(repo.count()+1);
+		repo.save(persisting);
 
 	}
 
